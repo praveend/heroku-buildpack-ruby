@@ -23,6 +23,14 @@ class LanguagePack::Ruby < LanguagePack::Base
   JVM_VERSION          = "openjdk7-latest"
   DEFAULT_RUBY_VERSION = "ruby-1.9.3"
 
+  DATABASE_ADAPTER_MAP = {
+      'mysql' => 'mysql2',
+      'mysql2' => 'mysql2',
+      'postgres' => 'postgresql',
+      'db2' => 'ibmdb',
+      'informix' => 'ibmdb'
+  }.freeze
+
   # detects if this is a valid Ruby app
   # @return [Boolean] true if it's a Ruby app
   def self.use?
@@ -65,7 +73,9 @@ class LanguagePack::Ruby < LanguagePack::Base
   end
 
   def compile
+    puts "In ruby cmpile"
     staging_environment_path # Save current environment path first
+    setup_database_url_env
     Dir.chdir(build_path)
     remove_vendor_bundle
     install_ruby
@@ -92,6 +102,14 @@ private
 
   def staging_environment_path
     @staging_environment_path ||= ENV["PATH"]
+  end
+
+  def setup_database_url_env
+    if( ENV["DATABASE_URL"] )
+      uri = URI.parse( ENV["DATABASE_URL"] )
+      uri.scheme = DATABASE_ADAPTER_MAP[uri.scheme] if DATABASE_ADAPTER_MAP[uri.scheme]
+      ENV["DATABASE_URL"] = uri
+    end
   end
 
   # the relative path to the bundler directory of gems
