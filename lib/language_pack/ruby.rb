@@ -109,6 +109,8 @@ private
   end
 
   def setup_database_url_env
+    puts "In set up"
+    puts ENV["DATABASE_URL"]
     if( ENV["DATABASE_URL"] )
       uri = URI.parse( ENV["DATABASE_URL"] )
       puts "uri is #{uri}"
