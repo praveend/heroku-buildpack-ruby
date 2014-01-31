@@ -116,7 +116,8 @@ private
       uri.scheme = DATABASE_ADAPTER_MAP[uri.scheme] if DATABASE_ADAPTER_MAP[uri.scheme]
       puts "uri scheme is #{uri.scheme}"
       ENV["DATABASE_URL"] = uri
-      puts "env is #{ENV["DATABASE_URL"]}"
+      puts "env is "
+      puts ENV["DATABASE_URL"]
     end
   end
 
