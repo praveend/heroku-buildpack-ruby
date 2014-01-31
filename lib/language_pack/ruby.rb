@@ -112,7 +112,9 @@ private
     puts "In set up"
     puts ENV["DATABASE_URL"]
     if( ENV["DATABASE_URL"] )
-      puts "In if condition"
+      uri = URI.parse( ENV["DATABASE_URL"] )
+      uri.scheme = DATABASE_ADAPTER_MAP[uri.scheme] if( DATABASE_ADAPTER_MAP[uri.scheme] )
+      ENV["DATABASE_URL"] = uri
     end
   end
 
