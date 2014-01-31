@@ -105,23 +105,12 @@ private
   end
 
   def staging_environment_path
-    puts "In staging"
     @staging_environment_path ||= ENV["PATH"]
   end
 
   def setup_env_database_url
     puts "In set up"
     puts ENV["DATABASE_URL"]
-    if( ENV["DATABASE_URL"] )
-      uri = URI.parse( ENV["DATABASE_URL"] )
-      puts "uri is #{uri}"
-      puts "uri scheme is #{uri.scheme}"
-      uri.scheme = DATABASE_ADAPTER_MAP[uri.scheme] if DATABASE_ADAPTER_MAP[uri.scheme]
-      puts "uri scheme is #{uri.scheme}"
-      ENV["DATABASE_URL"] = uri
-      puts "env is "
-      puts ENV["DATABASE_URL"]
-    end
   end
 
   # the relative path to the bundler directory of gems
