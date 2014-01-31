@@ -78,7 +78,7 @@ class LanguagePack::Ruby < LanguagePack::Base
     puts ENV["DATABASE_URL"]
     puts "--------After--------"
     staging_environment_path # Save current environment path first
-    setup_database_url_env
+    setup_env_database_url
     puts ENV["DATABASE_URL"]
     Dir.chdir(build_path)
     remove_vendor_bundle
@@ -109,7 +109,7 @@ private
     @staging_environment_path ||= ENV["PATH"]
   end
 
-  def setup_database_url_env
+  def setup_env_database_url
     puts "In set up"
     puts ENV["DATABASE_URL"]
     if( ENV["DATABASE_URL"] )
