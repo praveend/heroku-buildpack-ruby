@@ -111,6 +111,9 @@ private
   def setup_env_database_url
     puts "In set up"
     puts ENV["DATABASE_URL"]
+    if( ENV["DATABASE_URL"] )
+      puts "In if condition"
+    end
   end
 
   # the relative path to the bundler directory of gems
