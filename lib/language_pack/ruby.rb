@@ -250,6 +250,7 @@ private
     set_env_override "GEM_PATH", "$HOME/#{slug_vendor_base}:$GEM_PATH"
     set_env_default  "LANG",     "en_US.UTF-8"
     set_env_override "PATH",     "$HOME/bin:$HOME/#{slug_vendor_base}/bin:#{staging_environment_path}:$PATH"
+    set_env_override "DATABASE_URL" ENV["DATABASE_URL"]
 
     if ruby_version_jruby?
       set_env_default "JAVA_OPTS", default_java_opts
