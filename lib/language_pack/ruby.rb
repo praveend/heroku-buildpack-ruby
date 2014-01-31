@@ -4,6 +4,7 @@ require "language_pack"
 require "language_pack/base"
 require "language_pack/bundler_lockfile"
 require "language_pack/package_fetcher"
+require "uri"
 
 # base Ruby Language Pack. This is for any base ruby app.
 class LanguagePack::Ruby < LanguagePack::Base
@@ -113,8 +114,13 @@ private
     puts ENV["DATABASE_URL"]
     if( ENV["DATABASE_URL"] )
       uri = URI.parse( ENV["DATABASE_URL"] )
+      puts "uri is #{uri}"
+      puts "uri scheme is #{uri.scheme}"
       uri.scheme = DATABASE_ADAPTER_MAP[uri.scheme] if( DATABASE_ADAPTER_MAP[uri.scheme] )
+      puts "uri scheme is 2: #{uri.scheme}"
       ENV["DATABASE_URL"] = uri
+      puts "Env is: "
+      puts ENV["DATABASE_URL"]
     end
   end
 
