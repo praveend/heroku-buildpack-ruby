@@ -73,7 +73,11 @@ class LanguagePack::Ruby < LanguagePack::Base
   end
 
   def compile
-    puts "In ruby cmpile"
+    puts "In ruby compile"
+    puts "-------Before------------"
+    puts ENV["DATABASE_URL"]
+    puts "--------After--------"
+    puts ENV["DATABASE_URL"]
     staging_environment_path # Save current environment path first
     setup_database_url_env
     Dir.chdir(build_path)
