@@ -105,6 +105,7 @@ private
   end
 
   def staging_environment_path
+    puts "In staging"
     @staging_environment_path ||= ENV["PATH"]
   end
 
